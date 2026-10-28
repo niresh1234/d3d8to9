@@ -18,7 +18,7 @@ jobs:
 
       - name: Build
         run: |
-          msbuild d3d8to9.sln /p:Configuration=Release /p:Platform=x86
+          msbuild d3d8to9.sln /p:Configuration=Debug /p:Platform=x86
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
