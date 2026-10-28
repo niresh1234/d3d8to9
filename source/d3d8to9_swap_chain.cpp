@@ -16,6 +16,9 @@ Direct3DSwapChain8::~Direct3DSwapChain8()
 
 HRESULT STDMETHODCALLTYPE Direct3DSwapChain8::QueryInterface(REFIID riid, void **ppvObj)
 {
+#ifndef D3D8TO9NOLOG
+	LOG << "TRACE Direct3DSwapChain8::QueryInterface" << std::endl;
+#endif
 	if (ppvObj == nullptr)
 		return E_POINTER;
 
@@ -36,21 +39,33 @@ HRESULT STDMETHODCALLTYPE Direct3DSwapChain8::QueryInterface(REFIID riid, void *
 }
 ULONG STDMETHODCALLTYPE Direct3DSwapChain8::AddRef()
 {
+#ifndef D3D8TO9NOLOG
+	LOG << "TRACE Direct3DSwapChain8::AddRef" << std::endl;
+#endif
 	return ProxyInterface->AddRef();
 }
 ULONG STDMETHODCALLTYPE Direct3DSwapChain8::Release()
 {
+#ifndef D3D8TO9NOLOG
+	LOG << "TRACE Direct3DSwapChain8::Release" << std::endl;
+#endif
 	return ProxyInterface->Release();
 }
 
 HRESULT STDMETHODCALLTYPE Direct3DSwapChain8::Present(const RECT *pSourceRect, const RECT *pDestRect, HWND hDestWindowOverride, const RGNDATA *pDirtyRegion)
 {
+#ifndef D3D8TO9NOLOG
+	LOG << "TRACE Direct3DSwapChain8::Present" << std::endl;
+#endif
 	UNREFERENCED_PARAMETER(pDirtyRegion);
 
 	return ProxyInterface->Present(pSourceRect, pDestRect, hDestWindowOverride, nullptr, 0);
 }
 HRESULT STDMETHODCALLTYPE Direct3DSwapChain8::GetBackBuffer(UINT iBackBuffer, D3DBACKBUFFER_TYPE Type, IDirect3DSurface8 **ppBackBuffer)
 {
+#ifndef D3D8TO9NOLOG
+	LOG << "TRACE Direct3DSwapChain8::GetBackBuffer" << std::endl;
+#endif
 	if (ppBackBuffer == nullptr)
 		return D3DERR_INVALIDCALL;
 
