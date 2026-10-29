@@ -1256,10 +1256,24 @@ HRESULT STDMETHODCALLTYPE Direct3DDevice8::ValidateDevice(DWORD *pNumPasses)
 #ifndef D3D8TO9NOLOG
 	D3D8RING("Direct3DDevice8::ValidateDevice");
 #endif
-	const HRESULT hr = ProxyInterface->ValidateDevice(pNumPasses);
+	HRESULT hr = ProxyInterface->ValidateDevice(pNumPasses);
 #ifndef D3D8TO9NOLOG
 	LOG << "> ValidateDevice returned " << std::hex << hr << std::dec << " passes=" << (pNumPasses != nullptr ? *pNumPasses : 0) << std::endl;
 #endif
+
+	// Direct3D 9 drivers reject some texture stage and shader combinations that Direct3D 8 accepted (returning E_FAIL and leaving
+	// *pNumPasses unwritten). A game that uses ValidateDevice to pick a render technique can end up with no usable technique
+	// and crash, so report anything other than a lost device as a successful single pass, like Direct3D 8 effectively did.
+	if (FAILED(hr) && hr != D3DERR_DEVICELOST && hr != D3DERR_DEVICENOTRESET)
+	{
+		if (pNumPasses != nullptr)
+		{
+			*pNumPasses = 1;
+		}
+
+		hr = D3D_OK;
+	}
+
 	return hr;
 }
 HRESULT STDMETHODCALLTYPE Direct3DDevice8::GetInfo(DWORD DevInfoID, void *pDevInfoStruct, DWORD DevInfoStructSize)
