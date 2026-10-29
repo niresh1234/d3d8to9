@@ -452,4 +452,8 @@ private:
 
 #ifndef D3D8TO9NOLOG
 extern std::ofstream LOG;
+// In-memory ring buffer of the most recent Direct3D 8 calls (cheap, dumped by the crash handler)
+extern const char *D3D8Ring[8192];
+extern volatile LONG D3D8RingPos;
+#define D3D8RING(name) (D3D8Ring[static_cast<unsigned int>(InterlockedIncrement(&D3D8RingPos)) & 8191u] = (name))
 #endif

@@ -17,7 +17,7 @@ Direct3DTexture8::~Direct3DTexture8()
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::QueryInterface(REFIID riid, void **ppvObj)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::QueryInterface" << std::endl;
+	D3D8RING("Direct3DTexture8::QueryInterface");
 #endif
 	if (ppvObj == nullptr)
 		return E_POINTER;
@@ -42,14 +42,14 @@ HRESULT STDMETHODCALLTYPE Direct3DTexture8::QueryInterface(REFIID riid, void **p
 ULONG STDMETHODCALLTYPE Direct3DTexture8::AddRef()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::AddRef" << std::endl;
+	D3D8RING("Direct3DTexture8::AddRef");
 #endif
 	return ProxyInterface->AddRef();
 }
 ULONG STDMETHODCALLTYPE Direct3DTexture8::Release()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::Release" << std::endl;
+	D3D8RING("Direct3DTexture8::Release");
 #endif
 	return ProxyInterface->Release();
 }
@@ -57,7 +57,7 @@ ULONG STDMETHODCALLTYPE Direct3DTexture8::Release()
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::GetDevice(IDirect3DDevice8 **ppDevice)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::GetDevice" << std::endl;
+	D3D8RING("Direct3DTexture8::GetDevice");
 #endif
 	if (ppDevice == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -70,49 +70,49 @@ HRESULT STDMETHODCALLTYPE Direct3DTexture8::GetDevice(IDirect3DDevice8 **ppDevic
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::SetPrivateData(REFGUID refguid, const void *pData, DWORD SizeOfData, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::SetPrivateData" << std::endl;
+	D3D8RING("Direct3DTexture8::SetPrivateData");
 #endif
 	return ProxyInterface->SetPrivateData(refguid, pData, SizeOfData, Flags);
 }
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::GetPrivateData(REFGUID refguid, void *pData, DWORD *pSizeOfData)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::GetPrivateData" << std::endl;
+	D3D8RING("Direct3DTexture8::GetPrivateData");
 #endif
 	return ProxyInterface->GetPrivateData(refguid, pData, pSizeOfData);
 }
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::FreePrivateData(REFGUID refguid)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::FreePrivateData" << std::endl;
+	D3D8RING("Direct3DTexture8::FreePrivateData");
 #endif
 	return ProxyInterface->FreePrivateData(refguid);
 }
 DWORD STDMETHODCALLTYPE Direct3DTexture8::SetPriority(DWORD PriorityNew)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::SetPriority" << std::endl;
+	D3D8RING("Direct3DTexture8::SetPriority");
 #endif
 	return ProxyInterface->SetPriority(PriorityNew);
 }
 DWORD STDMETHODCALLTYPE Direct3DTexture8::GetPriority()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::GetPriority" << std::endl;
+	D3D8RING("Direct3DTexture8::GetPriority");
 #endif
 	return ProxyInterface->GetPriority();
 }
 void STDMETHODCALLTYPE Direct3DTexture8::PreLoad()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::PreLoad" << std::endl;
+	D3D8RING("Direct3DTexture8::PreLoad");
 #endif
 	ProxyInterface->PreLoad();
 }
 D3DRESOURCETYPE STDMETHODCALLTYPE Direct3DTexture8::GetType()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::GetType" << std::endl;
+	D3D8RING("Direct3DTexture8::GetType");
 #endif
 	return D3DRTYPE_TEXTURE;
 }
@@ -120,21 +120,21 @@ D3DRESOURCETYPE STDMETHODCALLTYPE Direct3DTexture8::GetType()
 DWORD STDMETHODCALLTYPE Direct3DTexture8::SetLOD(DWORD LODNew)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::SetLOD" << std::endl;
+	D3D8RING("Direct3DTexture8::SetLOD");
 #endif
 	return ProxyInterface->SetLOD(LODNew);
 }
 DWORD STDMETHODCALLTYPE Direct3DTexture8::GetLOD()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::GetLOD" << std::endl;
+	D3D8RING("Direct3DTexture8::GetLOD");
 #endif
 	return ProxyInterface->GetLOD();
 }
 DWORD STDMETHODCALLTYPE Direct3DTexture8::GetLevelCount()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::GetLevelCount" << std::endl;
+	D3D8RING("Direct3DTexture8::GetLevelCount");
 #endif
 	return ProxyInterface->GetLevelCount();
 }
@@ -142,7 +142,7 @@ DWORD STDMETHODCALLTYPE Direct3DTexture8::GetLevelCount()
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::GetLevelDesc(UINT Level, D3DSURFACE_DESC8 *pDesc)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::GetLevelDesc" << std::endl;
+	D3D8RING("Direct3DTexture8::GetLevelDesc");
 #endif
 	if (pDesc == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -160,7 +160,7 @@ HRESULT STDMETHODCALLTYPE Direct3DTexture8::GetLevelDesc(UINT Level, D3DSURFACE_
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::GetSurfaceLevel(UINT Level, IDirect3DSurface8 **ppSurfaceLevel)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::GetSurfaceLevel" << std::endl;
+	D3D8RING("Direct3DTexture8::GetSurfaceLevel");
 #endif
 	if (ppSurfaceLevel == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -180,21 +180,21 @@ HRESULT STDMETHODCALLTYPE Direct3DTexture8::GetSurfaceLevel(UINT Level, IDirect3
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::LockRect(UINT Level, D3DLOCKED_RECT *pLockedRect, const RECT *pRect, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::LockRect" << std::endl;
+	D3D8RING("Direct3DTexture8::LockRect");
 #endif
 	return ProxyInterface->LockRect(Level, pLockedRect, pRect, Flags);
 }
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::UnlockRect(UINT Level)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::UnlockRect" << std::endl;
+	D3D8RING("Direct3DTexture8::UnlockRect");
 #endif
 	return ProxyInterface->UnlockRect(Level);
 }
 HRESULT STDMETHODCALLTYPE Direct3DTexture8::AddDirtyRect(const RECT *pDirtyRect)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DTexture8::AddDirtyRect" << std::endl;
+	D3D8RING("Direct3DTexture8::AddDirtyRect");
 #endif
 	return ProxyInterface->AddDirtyRect(pDirtyRect);
 }
@@ -212,7 +212,7 @@ Direct3DCubeTexture8::~Direct3DCubeTexture8()
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::QueryInterface(REFIID riid, void **ppvObj)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::QueryInterface" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::QueryInterface");
 #endif
 	if (ppvObj == nullptr)
 		return E_POINTER;
@@ -237,14 +237,14 @@ HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::QueryInterface(REFIID riid, void
 ULONG STDMETHODCALLTYPE Direct3DCubeTexture8::AddRef()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::AddRef" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::AddRef");
 #endif
 	return ProxyInterface->AddRef();
 }
 ULONG STDMETHODCALLTYPE Direct3DCubeTexture8::Release()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::Release" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::Release");
 #endif
 	return ProxyInterface->Release();
 }
@@ -252,7 +252,7 @@ ULONG STDMETHODCALLTYPE Direct3DCubeTexture8::Release()
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::GetDevice(IDirect3DDevice8 **ppDevice)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::GetDevice" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::GetDevice");
 #endif
 	if (ppDevice == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -265,49 +265,49 @@ HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::GetDevice(IDirect3DDevice8 **ppD
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::SetPrivateData(REFGUID refguid, const void *pData, DWORD SizeOfData, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::SetPrivateData" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::SetPrivateData");
 #endif
 	return ProxyInterface->SetPrivateData(refguid, pData, SizeOfData, Flags);
 }
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::GetPrivateData(REFGUID refguid, void *pData, DWORD *pSizeOfData)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::GetPrivateData" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::GetPrivateData");
 #endif
 	return ProxyInterface->GetPrivateData(refguid, pData, pSizeOfData);
 }
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::FreePrivateData(REFGUID refguid)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::FreePrivateData" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::FreePrivateData");
 #endif
 	return ProxyInterface->FreePrivateData(refguid);
 }
 DWORD STDMETHODCALLTYPE Direct3DCubeTexture8::SetPriority(DWORD PriorityNew)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::SetPriority" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::SetPriority");
 #endif
 	return ProxyInterface->SetPriority(PriorityNew);
 }
 DWORD STDMETHODCALLTYPE Direct3DCubeTexture8::GetPriority()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::GetPriority" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::GetPriority");
 #endif
 	return ProxyInterface->GetPriority();
 }
 void STDMETHODCALLTYPE Direct3DCubeTexture8::PreLoad()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::PreLoad" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::PreLoad");
 #endif
 	ProxyInterface->PreLoad();
 }
 D3DRESOURCETYPE STDMETHODCALLTYPE Direct3DCubeTexture8::GetType()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::GetType" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::GetType");
 #endif
 	return D3DRTYPE_CUBETEXTURE;
 }
@@ -315,21 +315,21 @@ D3DRESOURCETYPE STDMETHODCALLTYPE Direct3DCubeTexture8::GetType()
 DWORD STDMETHODCALLTYPE Direct3DCubeTexture8::SetLOD(DWORD LODNew)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::SetLOD" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::SetLOD");
 #endif
 	return ProxyInterface->SetLOD(LODNew);
 }
 DWORD STDMETHODCALLTYPE Direct3DCubeTexture8::GetLOD()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::GetLOD" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::GetLOD");
 #endif
 	return ProxyInterface->GetLOD();
 }
 DWORD STDMETHODCALLTYPE Direct3DCubeTexture8::GetLevelCount()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::GetLevelCount" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::GetLevelCount");
 #endif
 	return ProxyInterface->GetLevelCount();
 }
@@ -337,7 +337,7 @@ DWORD STDMETHODCALLTYPE Direct3DCubeTexture8::GetLevelCount()
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::GetLevelDesc(UINT Level, D3DSURFACE_DESC8 *pDesc)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::GetLevelDesc" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::GetLevelDesc");
 #endif
 	if (pDesc == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -355,7 +355,7 @@ HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::GetLevelDesc(UINT Level, D3DSURF
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::GetCubeMapSurface(D3DCUBEMAP_FACES FaceType, UINT Level, IDirect3DSurface8 **ppCubeMapSurface)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::GetCubeMapSurface" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::GetCubeMapSurface");
 #endif
 	if (ppCubeMapSurface == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -375,21 +375,21 @@ HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::GetCubeMapSurface(D3DCUBEMAP_FAC
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::LockRect(D3DCUBEMAP_FACES FaceType, UINT Level, D3DLOCKED_RECT *pLockedRect, const RECT *pRect, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::LockRect" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::LockRect");
 #endif
 	return ProxyInterface->LockRect(FaceType, Level, pLockedRect, pRect, Flags);
 }
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::UnlockRect(D3DCUBEMAP_FACES FaceType, UINT Level)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::UnlockRect" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::UnlockRect");
 #endif
 	return ProxyInterface->UnlockRect(FaceType, Level);
 }
 HRESULT STDMETHODCALLTYPE Direct3DCubeTexture8::AddDirtyRect(D3DCUBEMAP_FACES FaceType, const RECT *pDirtyRect)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DCubeTexture8::AddDirtyRect" << std::endl;
+	D3D8RING("Direct3DCubeTexture8::AddDirtyRect");
 #endif
 	return ProxyInterface->AddDirtyRect(FaceType, pDirtyRect);
 }
@@ -407,7 +407,7 @@ Direct3DVolumeTexture8::~Direct3DVolumeTexture8()
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::QueryInterface(REFIID riid, void **ppvObj)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::QueryInterface" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::QueryInterface");
 #endif
 	if (ppvObj == nullptr)
 		return E_POINTER;
@@ -432,14 +432,14 @@ HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::QueryInterface(REFIID riid, vo
 ULONG STDMETHODCALLTYPE Direct3DVolumeTexture8::AddRef()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::AddRef" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::AddRef");
 #endif
 	return ProxyInterface->AddRef();
 }
 ULONG STDMETHODCALLTYPE Direct3DVolumeTexture8::Release()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::Release" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::Release");
 #endif
 	return ProxyInterface->Release();
 }
@@ -447,7 +447,7 @@ ULONG STDMETHODCALLTYPE Direct3DVolumeTexture8::Release()
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::GetDevice(IDirect3DDevice8 **ppDevice)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::GetDevice" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::GetDevice");
 #endif
 	if (ppDevice == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -460,49 +460,49 @@ HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::GetDevice(IDirect3DDevice8 **p
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::SetPrivateData(REFGUID refguid, const void *pData, DWORD SizeOfData, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::SetPrivateData" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::SetPrivateData");
 #endif
 	return ProxyInterface->SetPrivateData(refguid, pData, SizeOfData, Flags);
 }
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::GetPrivateData(REFGUID refguid, void *pData, DWORD *pSizeOfData)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::GetPrivateData" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::GetPrivateData");
 #endif
 	return ProxyInterface->GetPrivateData(refguid, pData, pSizeOfData);
 }
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::FreePrivateData(REFGUID refguid)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::FreePrivateData" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::FreePrivateData");
 #endif
 	return ProxyInterface->FreePrivateData(refguid);
 }
 DWORD STDMETHODCALLTYPE Direct3DVolumeTexture8::SetPriority(DWORD PriorityNew)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::SetPriority" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::SetPriority");
 #endif
 	return ProxyInterface->SetPriority(PriorityNew);
 }
 DWORD STDMETHODCALLTYPE Direct3DVolumeTexture8::GetPriority()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::GetPriority" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::GetPriority");
 #endif
 	return ProxyInterface->GetPriority();
 }
 void STDMETHODCALLTYPE Direct3DVolumeTexture8::PreLoad()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::PreLoad" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::PreLoad");
 #endif
 	ProxyInterface->PreLoad();
 }
 D3DRESOURCETYPE STDMETHODCALLTYPE Direct3DVolumeTexture8::GetType()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::GetType" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::GetType");
 #endif
 	return D3DRTYPE_VOLUMETEXTURE;
 }
@@ -510,21 +510,21 @@ D3DRESOURCETYPE STDMETHODCALLTYPE Direct3DVolumeTexture8::GetType()
 DWORD STDMETHODCALLTYPE Direct3DVolumeTexture8::SetLOD(DWORD LODNew)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::SetLOD" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::SetLOD");
 #endif
 	return ProxyInterface->SetLOD(LODNew);
 }
 DWORD STDMETHODCALLTYPE Direct3DVolumeTexture8::GetLOD()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::GetLOD" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::GetLOD");
 #endif
 	return ProxyInterface->GetLOD();
 }
 DWORD STDMETHODCALLTYPE Direct3DVolumeTexture8::GetLevelCount()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::GetLevelCount" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::GetLevelCount");
 #endif
 	return ProxyInterface->GetLevelCount();
 }
@@ -532,7 +532,7 @@ DWORD STDMETHODCALLTYPE Direct3DVolumeTexture8::GetLevelCount()
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::GetLevelDesc(UINT Level, D3DVOLUME_DESC8 *pDesc)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::GetLevelDesc" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::GetLevelDesc");
 #endif
 	if (pDesc == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -550,7 +550,7 @@ HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::GetLevelDesc(UINT Level, D3DVO
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::GetVolumeLevel(UINT Level, IDirect3DVolume8 **ppVolumeLevel)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::GetVolumeLevel" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::GetVolumeLevel");
 #endif
 	if (ppVolumeLevel == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -570,21 +570,21 @@ HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::GetVolumeLevel(UINT Level, IDi
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::LockBox(UINT Level, D3DLOCKED_BOX *pLockedVolume, const D3DBOX *pBox, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::LockBox" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::LockBox");
 #endif
 	return ProxyInterface->LockBox(Level, pLockedVolume, pBox, Flags);
 }
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::UnlockBox(UINT Level)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::UnlockBox" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::UnlockBox");
 #endif
 	return ProxyInterface->UnlockBox(Level);
 }
 HRESULT STDMETHODCALLTYPE Direct3DVolumeTexture8::AddDirtyBox(const D3DBOX *pDirtyBox)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolumeTexture8::AddDirtyBox" << std::endl;
+	D3D8RING("Direct3DVolumeTexture8::AddDirtyBox");
 #endif
 	return ProxyInterface->AddDirtyBox(pDirtyBox);
 }

@@ -17,7 +17,7 @@ Direct3DVolume8::~Direct3DVolume8()
 HRESULT STDMETHODCALLTYPE Direct3DVolume8::QueryInterface(REFIID riid, void **ppvObj)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::QueryInterface" << std::endl;
+	D3D8RING("Direct3DVolume8::QueryInterface");
 #endif
 	if (ppvObj == nullptr)
 		return E_POINTER;
@@ -40,14 +40,14 @@ HRESULT STDMETHODCALLTYPE Direct3DVolume8::QueryInterface(REFIID riid, void **pp
 ULONG STDMETHODCALLTYPE Direct3DVolume8::AddRef()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::AddRef" << std::endl;
+	D3D8RING("Direct3DVolume8::AddRef");
 #endif
 	return ProxyInterface->AddRef();
 }
 ULONG STDMETHODCALLTYPE Direct3DVolume8::Release()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::Release" << std::endl;
+	D3D8RING("Direct3DVolume8::Release");
 #endif
 	return ProxyInterface->Release();
 }
@@ -55,7 +55,7 @@ ULONG STDMETHODCALLTYPE Direct3DVolume8::Release()
 HRESULT STDMETHODCALLTYPE Direct3DVolume8::GetDevice(IDirect3DDevice8 **ppDevice)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::GetDevice" << std::endl;
+	D3D8RING("Direct3DVolume8::GetDevice");
 #endif
 	if (ppDevice == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -68,28 +68,28 @@ HRESULT STDMETHODCALLTYPE Direct3DVolume8::GetDevice(IDirect3DDevice8 **ppDevice
 HRESULT STDMETHODCALLTYPE Direct3DVolume8::SetPrivateData(REFGUID refguid, const void *pData, DWORD SizeOfData, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::SetPrivateData" << std::endl;
+	D3D8RING("Direct3DVolume8::SetPrivateData");
 #endif
 	return ProxyInterface->SetPrivateData(refguid, pData, SizeOfData, Flags);
 }
 HRESULT STDMETHODCALLTYPE Direct3DVolume8::GetPrivateData(REFGUID refguid, void *pData, DWORD *pSizeOfData)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::GetPrivateData" << std::endl;
+	D3D8RING("Direct3DVolume8::GetPrivateData");
 #endif
 	return ProxyInterface->GetPrivateData(refguid, pData, pSizeOfData);
 }
 HRESULT STDMETHODCALLTYPE Direct3DVolume8::FreePrivateData(REFGUID refguid)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::FreePrivateData" << std::endl;
+	D3D8RING("Direct3DVolume8::FreePrivateData");
 #endif
 	return ProxyInterface->FreePrivateData(refguid);
 }
 HRESULT STDMETHODCALLTYPE Direct3DVolume8::GetContainer(REFIID riid, void **ppContainer)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::GetContainer" << std::endl;
+	D3D8RING("Direct3DVolume8::GetContainer");
 #endif
 	const HRESULT hr = ProxyInterface->GetContainer(ConvertREFIID(riid), ppContainer);
 	if (SUCCEEDED(hr))
@@ -100,7 +100,7 @@ HRESULT STDMETHODCALLTYPE Direct3DVolume8::GetContainer(REFIID riid, void **ppCo
 HRESULT STDMETHODCALLTYPE Direct3DVolume8::GetDesc(D3DVOLUME_DESC8 *pDesc)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::GetDesc" << std::endl;
+	D3D8RING("Direct3DVolume8::GetDesc");
 #endif
 	if (pDesc == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -118,14 +118,14 @@ HRESULT STDMETHODCALLTYPE Direct3DVolume8::GetDesc(D3DVOLUME_DESC8 *pDesc)
 HRESULT STDMETHODCALLTYPE Direct3DVolume8::LockBox(D3DLOCKED_BOX *pLockedVolume, const D3DBOX *pBox, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::LockBox" << std::endl;
+	D3D8RING("Direct3DVolume8::LockBox");
 #endif
 	return ProxyInterface->LockBox(pLockedVolume, pBox, Flags);
 }
 HRESULT STDMETHODCALLTYPE Direct3DVolume8::UnlockBox()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DVolume8::UnlockBox" << std::endl;
+	D3D8RING("Direct3DVolume8::UnlockBox");
 #endif
 	return ProxyInterface->UnlockBox();
 }

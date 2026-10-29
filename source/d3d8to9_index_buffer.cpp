@@ -17,7 +17,7 @@ Direct3DIndexBuffer8::~Direct3DIndexBuffer8()
 HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::QueryInterface(REFIID riid, void **ppvObj)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::QueryInterface" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::QueryInterface");
 #endif
 	if (ppvObj == nullptr)
 		return E_POINTER;
@@ -41,14 +41,14 @@ HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::QueryInterface(REFIID riid, void
 ULONG STDMETHODCALLTYPE Direct3DIndexBuffer8::AddRef()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::AddRef" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::AddRef");
 #endif
 	return ProxyInterface->AddRef();
 }
 ULONG STDMETHODCALLTYPE Direct3DIndexBuffer8::Release()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::Release" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::Release");
 #endif
 	return ProxyInterface->Release();
 }
@@ -56,7 +56,7 @@ ULONG STDMETHODCALLTYPE Direct3DIndexBuffer8::Release()
 HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::GetDevice(IDirect3DDevice8 **ppDevice)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::GetDevice" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::GetDevice");
 #endif
 	if (ppDevice == nullptr)
 		return D3DERR_INVALIDCALL;
@@ -69,49 +69,49 @@ HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::GetDevice(IDirect3DDevice8 **ppD
 HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::SetPrivateData(REFGUID refguid, const void *pData, DWORD SizeOfData, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::SetPrivateData" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::SetPrivateData");
 #endif
 	return ProxyInterface->SetPrivateData(refguid, pData, SizeOfData, Flags);
 }
 HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::GetPrivateData(REFGUID refguid, void *pData, DWORD *pSizeOfData)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::GetPrivateData" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::GetPrivateData");
 #endif
 	return ProxyInterface->GetPrivateData(refguid, pData, pSizeOfData);
 }
 HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::FreePrivateData(REFGUID refguid)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::FreePrivateData" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::FreePrivateData");
 #endif
 	return ProxyInterface->FreePrivateData(refguid);
 }
 DWORD STDMETHODCALLTYPE Direct3DIndexBuffer8::SetPriority(DWORD PriorityNew)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::SetPriority" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::SetPriority");
 #endif
 	return ProxyInterface->SetPriority(PriorityNew);
 }
 DWORD STDMETHODCALLTYPE Direct3DIndexBuffer8::GetPriority()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::GetPriority" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::GetPriority");
 #endif
 	return ProxyInterface->GetPriority();
 }
 void STDMETHODCALLTYPE Direct3DIndexBuffer8::PreLoad()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::PreLoad" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::PreLoad");
 #endif
 	ProxyInterface->PreLoad();
 }
 D3DRESOURCETYPE STDMETHODCALLTYPE Direct3DIndexBuffer8::GetType()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::GetType" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::GetType");
 #endif
 	return D3DRTYPE_INDEXBUFFER;
 }
@@ -119,7 +119,7 @@ D3DRESOURCETYPE STDMETHODCALLTYPE Direct3DIndexBuffer8::GetType()
 HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::Lock(UINT OffsetToLock, UINT SizeToLock, BYTE **ppbData, DWORD Flags)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::Lock" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::Lock");
 #endif
 	if ((Flags & D3DLOCK_DISCARD) != 0)
 	{
@@ -138,14 +138,14 @@ HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::Lock(UINT OffsetToLock, UINT Siz
 HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::Unlock()
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::Unlock" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::Unlock");
 #endif
 	return ProxyInterface->Unlock();
 }
 HRESULT STDMETHODCALLTYPE Direct3DIndexBuffer8::GetDesc(D3DINDEXBUFFER_DESC *pDesc)
 {
 #ifndef D3D8TO9NOLOG
-	LOG << "TRACE Direct3DIndexBuffer8::GetDesc" << std::endl;
+	D3D8RING("Direct3DIndexBuffer8::GetDesc");
 #endif
 	return ProxyInterface->GetDesc(pDesc);
 }
