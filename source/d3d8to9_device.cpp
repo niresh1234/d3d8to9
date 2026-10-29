@@ -1020,7 +1020,22 @@ HRESULT STDMETHODCALLTYPE Direct3DDevice8::SetTextureStageState(DWORD Stage, D3D
 }
 HRESULT STDMETHODCALLTYPE Direct3DDevice8::ValidateDevice(DWORD *pNumPasses)
 {
-	return ProxyInterface->ValidateDevice(pNumPasses);
+	HRESULT hr = ProxyInterface->ValidateDevice(pNumPasses);
+
+	// Direct3D 9 drivers reject some texture stage and shader combinations that Direct3D 8 accepted (returning E_FAIL and
+	// leaving *pNumPasses unwritten). Games that use ValidateDevice to pick a render technique can then end up with no usable
+	// technique and crash, so report anything other than a lost device as a successful single pass.
+	if (FAILED(hr) && hr != D3DERR_DEVICELOST && hr != D3DERR_DEVICENOTRESET)
+	{
+		if (pNumPasses != nullptr)
+		{
+			*pNumPasses = 1;
+		}
+
+		hr = D3D_OK;
+	}
+
+	return hr;
 }
 HRESULT STDMETHODCALLTYPE Direct3DDevice8::GetInfo(DWORD DevInfoID, void *pDevInfoStruct, DWORD DevInfoStructSize)
 {

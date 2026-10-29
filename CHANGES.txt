@@ -1,0 +1,10 @@
+Changes compared to upstream crosire/d3d8to9 (commit 255338f):
+
+1. source/d3d8to9_device.cpp - Direct3DDevice8::ValidateDevice:
+   Direct3D 9 failures (except device lost / not reset) are reported as success with one pass.
+   Fixes the crash in EA Cricket 07 (its technique picker reads uninitialized memory when no technique validates).
+
+2. d3d8to9.vcxproj - Release|Win32: RuntimeLibrary = MultiThreaded (/MT)
+   The Visual C++ runtime is linked into d3d8.dll, so no redistributable is needed.
+
+Build: Release | x86 -> bin\Release\d3d8.dll
