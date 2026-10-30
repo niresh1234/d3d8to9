@@ -1020,11 +1020,7 @@ HRESULT STDMETHODCALLTYPE Direct3DDevice8::SetTextureStageState(DWORD Stage, D3D
 }
 HRESULT STDMETHODCALLTYPE Direct3DDevice8::ValidateDevice(DWORD *pNumPasses)
 {
-	if (pNumPasses != nullptr)
-	{
-		*pNumPasses = 1;
-	}
-
+	*pNumPasses = 1;
 	return ProxyInterface->ValidateDevice(pNumPasses);
 }
 HRESULT STDMETHODCALLTYPE Direct3DDevice8::GetInfo(DWORD DevInfoID, void *pDevInfoStruct, DWORD DevInfoStructSize)
