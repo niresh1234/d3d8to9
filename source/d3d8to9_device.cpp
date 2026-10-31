@@ -1020,7 +1020,129 @@ HRESULT STDMETHODCALLTYPE Direct3DDevice8::SetTextureStageState(DWORD Stage, D3D
 }
 HRESULT STDMETHODCALLTYPE Direct3DDevice8::ValidateDevice(DWORD *pNumPasses)
 {
-	return ProxyInterface->ValidateDevice(pNumPasses);
+	constexpr DWORD MaxTextureStages = 8;
+
+	// The texture argument states are not contiguous in the D3D9 enum.
+	// Check ARG1 and ARG2 first, followed by ARG0.
+	const D3DTEXTURESTAGESTATETYPE ArgStates[2][3] =
+	{
+		{ D3DTSS_COLORARG1, D3DTSS_COLORARG2, D3DTSS_COLORARG0 },
+		{ D3DTSS_ALPHAARG1, D3DTSS_ALPHAARG2, D3DTSS_ALPHAARG0 }
+	};
+
+	struct StageState
+	{
+		DWORD ColorOp = D3DTOP_DISABLE;
+		DWORD AlphaOp = D3DTOP_DISABLE;
+		DWORD ColorArgs[3] = {};
+		DWORD AlphaArgs[3] = {};
+		DWORD MinFilter = 0;
+		DWORD MagFilter = 0;
+		DWORD MipFilter = 0;
+		bool HasTexture = false;
+	};
+
+	StageState OldStates[MaxTextureStages] = {};
+
+	for (DWORD i = 0; i < MaxTextureStages; i++)
+	{
+		// Save all texture-stage and sampler states.
+		ProxyInterface->GetTextureStageState(i, D3DTSS_COLOROP, &OldStates[i].ColorOp);
+		ProxyInterface->GetTextureStageState(i, D3DTSS_ALPHAOP, &OldStates[i].AlphaOp);
+
+		for (DWORD j = 0; j < 3; j++)
+		{
+			ProxyInterface->GetTextureStageState(i, ArgStates[0][j], &OldStates[i].ColorArgs[j]);
+			ProxyInterface->GetTextureStageState(i, ArgStates[1][j], &OldStates[i].AlphaArgs[j]);
+		}
+
+		ProxyInterface->GetSamplerState(i, D3DSAMP_MINFILTER, &OldStates[i].MinFilter);
+		ProxyInterface->GetSamplerState(i, D3DSAMP_MAGFILTER, &OldStates[i].MagFilter);
+		ProxyInterface->GetSamplerState(i, D3DSAMP_MIPFILTER, &OldStates[i].MipFilter);
+
+		IDirect3DBaseTexture9* pTexture = nullptr;
+		if (SUCCEEDED(ProxyInterface->GetTexture(i, &pTexture)) && pTexture)
+		{
+			OldStates[i].HasTexture = true;
+			pTexture->Release();
+		}
+
+		// Set valid texture filters for all stages.
+		ProxyInterface->SetSamplerState(i, D3DSAMP_MINFILTER, D3DTEXF_POINT);
+		ProxyInterface->SetSamplerState(i, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+		ProxyInterface->SetSamplerState(i, D3DSAMP_MIPFILTER, D3DTEXF_NONE);
+
+		// Disable every stage with no texture.
+		if (!OldStates[i].HasTexture)
+		{
+			ProxyInterface->SetTextureStageState(i, D3DTSS_COLOROP, D3DTOP_DISABLE);
+			ProxyInterface->SetTextureStageState(i, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
+			continue;
+		}
+
+		// Replace D3DTA_TEXTURE with D3DTA_CURRENT in remaining active stages.
+		for (DWORD j = 0; j < 3; j++)
+		{
+			DWORD ColorArg = OldStates[i].ColorArgs[j];
+			DWORD AlphaArg = OldStates[i].AlphaArgs[j];
+
+			if ((ColorArg & D3DTA_SELECTMASK) == D3DTA_TEXTURE)
+			{
+				ColorArg = (ColorArg & ~D3DTA_SELECTMASK) | D3DTA_CURRENT;
+				ProxyInterface->SetTextureStageState(i, ArgStates[0][j], ColorArg);
+			}
+
+			if ((AlphaArg & D3DTA_SELECTMASK) == D3DTA_TEXTURE)
+			{
+				AlphaArg = (AlphaArg & ~D3DTA_SELECTMASK) | D3DTA_CURRENT;
+				ProxyInterface->SetTextureStageState(i, ArgStates[1][j], AlphaArg);
+			}
+		}
+	}
+
+	// Validate the modified configuration.
+	DWORD NumPasses = 0;
+	HRESULT hr = ProxyInterface->ValidateDevice(&NumPasses);
+
+	// Restore all original texture-stage and sampler states.
+	for (DWORD i = 0; i < MaxTextureStages; i++)
+	{
+		ProxyInterface->SetTextureStageState(i, D3DTSS_COLOROP, OldStates[i].ColorOp);
+		ProxyInterface->SetTextureStageState(i, D3DTSS_ALPHAOP, OldStates[i].AlphaOp);
+
+		for (DWORD j = 0; j < 3; j++)
+		{
+			ProxyInterface->SetTextureStageState(i, ArgStates[0][j], OldStates[i].ColorArgs[j]);
+			ProxyInterface->SetTextureStageState(i, ArgStates[1][j], OldStates[i].AlphaArgs[j]);
+		}
+
+		ProxyInterface->SetSamplerState(i, D3DSAMP_MINFILTER, OldStates[i].MinFilter);
+		ProxyInterface->SetSamplerState(i, D3DSAMP_MAGFILTER, OldStates[i].MagFilter);
+		ProxyInterface->SetSamplerState(i, D3DSAMP_MIPFILTER, OldStates[i].MipFilter);
+	}
+
+	// Direct3D8 doesn't check for unsupported texture filters.
+	if (hr == D3DERR_UNSUPPORTEDTEXTUREFILTER)
+	{
+		NumPasses = 1;
+		hr = D3D_OK;
+	}
+
+	// Last resort (like DXVK): Direct3D 9 can still reject states that Direct3D 8
+	// accepted (E_FAIL), so report anything but a lost device as a successful pass.
+	if (FAILED(hr) && hr != D3DERR_DEVICELOST && hr != D3DERR_DEVICENOTRESET)
+	{
+		NumPasses = 1;
+		hr = D3D_OK;
+	}
+
+	// Return the validation result.
+	if (SUCCEEDED(hr) && pNumPasses)
+	{
+		*pNumPasses = NumPasses;
+	}
+
+	return hr;
 }
 HRESULT STDMETHODCALLTYPE Direct3DDevice8::GetInfo(DWORD DevInfoID, void *pDevInfoStruct, DWORD DevInfoStructSize)
 {
